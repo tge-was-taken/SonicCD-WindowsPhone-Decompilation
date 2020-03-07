@@ -306,7 +306,8 @@ namespace Retro_Engine
 				fData.fileName[i] = '\0';
 				i++;
 			}
-			if (FileIO.fileReader.Length > 0L)
+			// Throws exception
+			//if (FileIO.fileReader.Length > 0L)
 			{
 				FileIO.fileReader.Close();
 			}
@@ -602,8 +603,8 @@ namespace Retro_Engine
 				}
 			}
 			FileIO.eStringNo = (byte)((FileIO.vFileSize & 508U) >> 2);
-			FileIO.eStringPosB = 1 + FileIO.eStringNo % 9;
-			FileIO.eStringPosA = 1 + FileIO.eStringNo % FileIO.eStringPosB;
+			FileIO.eStringPosB = ( byte )( 1 + FileIO.eStringNo % 9 );
+			FileIO.eStringPosA = ( byte )( 1 + FileIO.eStringNo % FileIO.eStringPosB );
 			FileIO.eNybbleSwap = false;
 			FileIO.useRSDKFile = true;
 			return true;
@@ -645,14 +646,14 @@ namespace Retro_Engine
 						if (!FileIO.eNybbleSwap)
 						{
 							FileIO.eNybbleSwap = true;
-							FileIO.eStringPosA = 3 + FileIO.eStringNo % 15;
-							FileIO.eStringPosB = 1 + FileIO.eStringNo % 7;
+							FileIO.eStringPosA = (byte)(3 + FileIO.eStringNo % 15);
+							FileIO.eStringPosB = (byte)(1 + FileIO.eStringNo % 7);
 						}
 						else
 						{
 							FileIO.eNybbleSwap = false;
-							FileIO.eStringPosA = 6 + FileIO.eStringNo % 12;
-							FileIO.eStringPosB = 4 + FileIO.eStringNo % 5;
+							FileIO.eStringPosA = (byte)(6 + FileIO.eStringNo % 12);
+							FileIO.eStringPosB = (byte)(4 + FileIO.eStringNo % 5);
 						}
 					}
 					else
@@ -732,14 +733,14 @@ namespace Retro_Engine
 						if (!FileIO.eNybbleSwap)
 						{
 							FileIO.eNybbleSwap = true;
-							FileIO.eStringPosA = 3 + FileIO.eStringNo % 15;
-							FileIO.eStringPosB = 1 + FileIO.eStringNo % 7;
+							FileIO.eStringPosA = (byte)(3 + FileIO.eStringNo % 15);
+							FileIO.eStringPosB = (byte)(1 + FileIO.eStringNo % 7);
 						}
 						else
 						{
 							FileIO.eNybbleSwap = false;
-							FileIO.eStringPosA = 6 + FileIO.eStringNo % 12;
-							FileIO.eStringPosB = 4 + FileIO.eStringNo % 5;
+							FileIO.eStringPosA = (byte)(6 + FileIO.eStringNo % 12);
+							FileIO.eStringPosB = (byte)(4 + FileIO.eStringNo % 5);
 						}
 					}
 					else
@@ -819,14 +820,14 @@ namespace Retro_Engine
 						if (!FileIO.eNybbleSwap)
 						{
 							FileIO.eNybbleSwap = true;
-							FileIO.eStringPosA = 3 + FileIO.eStringNo % 15;
-							FileIO.eStringPosB = 1 + FileIO.eStringNo % 7;
+							FileIO.eStringPosA = (byte)(3 + FileIO.eStringNo % 15);
+							FileIO.eStringPosB = (byte)(1 + FileIO.eStringNo % 7);
 						}
 						else
 						{
 							FileIO.eNybbleSwap = false;
-							FileIO.eStringPosA = 6 + FileIO.eStringNo % 12;
-							FileIO.eStringPosB = 4 + FileIO.eStringNo % 5;
+							FileIO.eStringPosA = (byte)(6 + FileIO.eStringNo % 12);
+							FileIO.eStringPosB = (byte)(4 + FileIO.eStringNo % 5);
 						}
 					}
 					else
@@ -895,7 +896,8 @@ namespace Retro_Engine
 		{
 			if (FileIO.useRSDKFile)
 			{
-				if (FileIO.fileReader.Length > 0L)
+				// Throws exception
+				//if (FileIO.fileReader.Length > 0L)
 				{
 					FileIO.fileReader.Close();
 				}
@@ -931,8 +933,8 @@ namespace Retro_Engine
 			{
 				FileIO.readPos = newFilePos + FileIO.virtualFileOffset;
 				FileIO.eStringNo = (byte)((FileIO.vFileSize & 508U) >> 2);
-				FileIO.eStringPosB = 1 + FileIO.eStringNo % 9;
-				FileIO.eStringPosA = 1 + FileIO.eStringNo % FileIO.eStringPosB;
+				FileIO.eStringPosB = (byte)(1 + FileIO.eStringNo % 9);
+				FileIO.eStringPosA = (byte)(1 + FileIO.eStringNo % FileIO.eStringPosB);
 				FileIO.eNybbleSwap = false;
 				while (newFilePos > 0U)
 				{
@@ -945,14 +947,14 @@ namespace Retro_Engine
 						if (!FileIO.eNybbleSwap)
 						{
 							FileIO.eNybbleSwap = true;
-							FileIO.eStringPosA = 3 + FileIO.eStringNo % 15;
-							FileIO.eStringPosB = 1 + FileIO.eStringNo % 7;
+							FileIO.eStringPosA = (byte)(3 + FileIO.eStringNo % 15);
+							FileIO.eStringPosB = (byte)(1 + FileIO.eStringNo % 7);
 						}
 						else
 						{
 							FileIO.eNybbleSwap = false;
-							FileIO.eStringPosA = 6 + FileIO.eStringNo % 12;
-							FileIO.eStringPosB = 4 + FileIO.eStringNo % 5;
+							FileIO.eStringPosA = (byte)(6 + FileIO.eStringNo % 12);
+							FileIO.eStringPosB = (byte)(4 + FileIO.eStringNo % 5);
 						}
 					}
 					else
@@ -1006,10 +1008,11 @@ namespace Retro_Engine
 		// Token: 0x06000030 RID: 48 RVA: 0x00008FD4 File Offset: 0x000071D4
 		public static byte ReadSaveRAMData()
 		{
-			IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
+			// IsolatedStorage doesn't work as intended on desktop setups
+			//IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
 			try
 			{
-				BinaryReader binaryReader = new BinaryReader(new IsolatedStorageFileStream("SGame.bin", 3, userStoreForApplication));
+				BinaryReader binaryReader = new BinaryReader(new FileStream("SGame.bin", FileMode.Open));
 				for (int i = 0; i < FileIO.saveRAM.Length; i++)
 				{
 					FileIO.saveRAM[i] = binaryReader.ReadInt32();
@@ -1025,10 +1028,11 @@ namespace Retro_Engine
 		// Token: 0x06000031 RID: 49 RVA: 0x00009034 File Offset: 0x00007234
 		public static byte WriteSaveRAMData()
 		{
-			IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
+			// IsolatedStorage doesn't work as intended on desktop setups
+			//IsolatedStorageFile userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
 			try
 			{
-				BinaryWriter binaryWriter = new BinaryWriter(new IsolatedStorageFileStream("SGame.bin", 4, userStoreForApplication));
+				BinaryWriter binaryWriter = new BinaryWriter(new FileStream("SGame.bin", FileMode.OpenOrCreate));
 				for (int i = 0; i < FileIO.saveRAM.Length; i++)
 				{
 					binaryWriter.Write(FileIO.saveRAM[i]);

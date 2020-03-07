@@ -149,7 +149,7 @@ namespace Retro_Engine
 				while (i > 0)
 				{
 					b = FileIO.ReadByte();
-					byte b2 = b & 127;
+					byte b2 = (byte)(b & 127);
 					if (b < 128)
 					{
 						while (b2 > 0)
@@ -194,7 +194,7 @@ namespace Retro_Engine
 				while (i > 0)
 				{
 					b = FileIO.ReadByte();
-					byte b2 = b & 127;
+					byte b2 = (byte)(b & 127);
 					if (b < 128)
 					{
 						while (b2 > 0)

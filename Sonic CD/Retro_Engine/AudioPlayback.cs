@@ -335,7 +335,7 @@ namespace Retro_Engine
 					{
 						for (num2 = 0U; num2 < num; num2 += 2U)
 						{
-							array2[(int)((UIntPtr)num2)] = FileIO.ReadByte() - 128;
+							array2[(int)((UIntPtr)num2)] = (byte)(FileIO.ReadByte() - 128);
 							array2[(int)((UIntPtr)(num2 + 1U))] = 0;
 						}
 					}
@@ -344,7 +344,7 @@ namespace Retro_Engine
 						for (num2 = 0U; num2 < num; num2 += 2U)
 						{
 							array2[(int)((UIntPtr)num2)] = 0;
-							array2[(int)((UIntPtr)(num2 + 1U))] = FileIO.ReadByte() - 128;
+							array2[(int)((UIntPtr)(num2 + 1U))] = (byte)(FileIO.ReadByte() - 128);
 						}
 					}
 					if (AudioPlayback.sfxLoaded[sfxNum])

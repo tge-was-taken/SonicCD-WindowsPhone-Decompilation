@@ -42,25 +42,25 @@ namespace Retro_Engine
 					b = FileIO.ReadByte();
 					FontCharacter[] array4 = TextSystem.fontCharacterList;
 					int num5 = num;
-					array4[num5].left = array4[num5].left + (short)(b << 8);
+					array4[num5].left = (short)(array4[num5].left + (short)(b << 8));
 					b = FileIO.ReadByte();
 					TextSystem.fontCharacterList[num].top = (short)b;
 					b = FileIO.ReadByte();
 					FontCharacter[] array5 = TextSystem.fontCharacterList;
 					int num6 = num;
-					array5[num6].top = array5[num6].top + (short)(b << 8);
+					array5[num6].top = (short)(array5[num6].top + (short)(b << 8));
 					b = FileIO.ReadByte();
 					TextSystem.fontCharacterList[num].xSize = (short)b;
 					b = FileIO.ReadByte();
 					FontCharacter[] array6 = TextSystem.fontCharacterList;
 					int num7 = num;
-					array6[num7].xSize = array6[num7].xSize + (short)(b << 8);
+					array6[num7].xSize = (short)(array6[num7].xSize + (short)(b << 8));
 					b = FileIO.ReadByte();
 					TextSystem.fontCharacterList[num].ySize = (short)b;
 					b = FileIO.ReadByte();
 					FontCharacter[] array7 = TextSystem.fontCharacterList;
 					int num8 = num;
-					array7[num8].ySize = array7[num8].ySize + (short)(b << 8);
+					array7[num8].ySize = (short)(array7[num8].ySize + (short)(b << 8));
 					b = FileIO.ReadByte();
 					TextSystem.fontCharacterList[num].xPivot = (short)b;
 					b = FileIO.ReadByte();
@@ -68,14 +68,14 @@ namespace Retro_Engine
 					{
 						FontCharacter[] array8 = TextSystem.fontCharacterList;
 						int num9 = num;
-						array8[num9].xPivot = array8[num9].xPivot + (short)(b - 128 << 8);
+						array8[num9].xPivot = (short)(array8[num9].xPivot + (short)(b - 128 << 8));
 						TextSystem.fontCharacterList[num].xPivot = (short)(-(short)(32768 - (int)TextSystem.fontCharacterList[num].xPivot));
 					}
 					else
 					{
 						FontCharacter[] array9 = TextSystem.fontCharacterList;
 						int num10 = num;
-						array9[num10].xPivot = array9[num10].xPivot + (short)(b << 8);
+						array9[num10].xPivot = (short)(array9[num10].xPivot + (short)(b << 8));
 					}
 					b = FileIO.ReadByte();
 					TextSystem.fontCharacterList[num].yPivot = (short)b;
@@ -84,14 +84,14 @@ namespace Retro_Engine
 					{
 						FontCharacter[] array10 = TextSystem.fontCharacterList;
 						int num11 = num;
-						array10[num11].yPivot = array10[num11].yPivot + (short)(b - 128 << 8);
+						array10[num11].yPivot = (short)(array10[num11].yPivot + (short)(b - 128 << 8));
 						TextSystem.fontCharacterList[num].yPivot = (short)(-(short)(32768 - (int)TextSystem.fontCharacterList[num].xPivot));
 					}
 					else
 					{
 						FontCharacter[] array11 = TextSystem.fontCharacterList;
 						int num12 = num;
-						array11[num12].yPivot = array11[num12].yPivot + (short)(b << 8);
+						array11[num12].yPivot = (short)(array11[num12].yPivot + (short)(b << 8));
 					}
 					b = FileIO.ReadByte();
 					TextSystem.fontCharacterList[num].xAdvance = (short)b;
@@ -100,14 +100,14 @@ namespace Retro_Engine
 					{
 						FontCharacter[] array12 = TextSystem.fontCharacterList;
 						int num13 = num;
-						array12[num13].xAdvance = array12[num13].xAdvance + (short)(b - 128 << 8);
+						array12[num13].xAdvance = (short)(array12[num13].xAdvance + (short)(b - 128 << 8));
 						TextSystem.fontCharacterList[num].xAdvance = (short)(-(short)(32768 - (int)TextSystem.fontCharacterList[num].xAdvance));
 					}
 					else
 					{
 						FontCharacter[] array13 = TextSystem.fontCharacterList;
 						int num14 = num;
-						array13[num14].xAdvance = array13[num14].xAdvance + (short)(b << 8);
+						array13[num14].xAdvance = (short)(array13[num14].xAdvance + (short)(b << 8));
 					}
 					b = FileIO.ReadByte();
 					b = FileIO.ReadByte();

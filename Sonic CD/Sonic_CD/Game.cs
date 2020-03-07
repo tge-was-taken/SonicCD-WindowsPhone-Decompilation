@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Microsoft.Devices;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,8 +12,11 @@ using Retro_Engine;
 namespace Sonic_CD
 {
 	// Token: 0x0200000E RID: 14
-	public class Game : Game
+	public class Game : Microsoft.Xna.Framework.Game
 	{
+		private static Dictionary<string, int> achievementKeyToId;
+		private static Dictionary<string, int> languageCodeToId;
+
 		// Token: 0x06000060 RID: 96 RVA: 0x0000BB1C File Offset: 0x00009D1C
 		public Game()
 		{
@@ -24,6 +27,7 @@ namespace Sonic_CD
 			this.graphics.PreferredBackBufferFormat = SurfaceFormat.Bgr565;
 			this.graphics.PreferredDepthStencilFormat = DepthFormat.None;
 			this.graphics.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(this.graphics_PreparingDeviceSettings);
+			this.Content = new ContentManagerPatch( Content.ServiceProvider );
 			base.Content.RootDirectory = "Content";
 			base.TargetElapsedTime = TimeSpan.FromSeconds(0.016666666666666666);
 			base.InactiveSleepTime = TimeSpan.FromSeconds(1.0);
@@ -39,11 +43,12 @@ namespace Sonic_CD
 		protected override void Initialize()
 		{
 			SignedInGamer.SignedIn += new EventHandler<SignedInEventArgs>(this.GamerSignedInCallback);
-			if (Environment.DeviceType != 1)
-			{
-				this.gamerServiceInstance = new GamerServicesComponent(this);
-				base.Components.Add(this.gamerServiceInstance);
-			}
+			// API only available on WP
+			//if (Environment.DeviceType != 1)
+			//{
+			//	this.gamerServiceInstance = new GamerServicesComponent(this);
+			//	base.Components.Add(this.gamerServiceInstance);
+			//}
 			base.Initialize();
 		}
 
@@ -91,7 +96,7 @@ namespace Sonic_CD
 					string key;
 					if ((key = achievement.Key) != null)
 					{
-						if (<PrivateImplementationDetails>{D35AF46A-1892-4F52-B201-E664C9200079}.$$method0x6000064-1 == null)
+						if (achievementKeyToId == null)
 						{
 							Dictionary<string, int> dictionary = new Dictionary<string, int>(12);
 							dictionary.Add("88 Miles Per Hour", 0);
@@ -106,10 +111,10 @@ namespace Sonic_CD
 							dictionary.Add("Dr Eggman Got Served", 9);
 							dictionary.Add("Just In Time", 10);
 							dictionary.Add("Saviour of the Planet", 11);
-							<PrivateImplementationDetails>{D35AF46A-1892-4F52-B201-E664C9200079}.$$method0x6000064-1 = dictionary;
+							achievementKeyToId = dictionary;
 						}
 						int num;
-						if (<PrivateImplementationDetails>{D35AF46A-1892-4F52-B201-E664C9200079}.$$method0x6000064-1.TryGetValue(key, ref num))
+						if (achievementKeyToId.TryGetValue(key, out num))
 						{
 							switch (num)
 							{
@@ -411,7 +416,7 @@ namespace Sonic_CD
 			string twoLetterISOLanguageName;
 			if ((twoLetterISOLanguageName = CultureInfo.CurrentCulture.TwoLetterISOLanguageName) != null)
 			{
-				if (<PrivateImplementationDetails>{D35AF46A-1892-4F52-B201-E664C9200079}.$$method0x600006e-1 == null)
+				if (languageCodeToId == null)
 				{
 					Dictionary<string, int> dictionary = new Dictionary<string, int>(6);
 					dictionary.Add("en", 0);
@@ -420,10 +425,10 @@ namespace Sonic_CD
 					dictionary.Add("de", 3);
 					dictionary.Add("es", 4);
 					dictionary.Add("ja", 5);
-					<PrivateImplementationDetails>{D35AF46A-1892-4F52-B201-E664C9200079}.$$method0x600006e-1 = dictionary;
+					languageCodeToId = dictionary;
 				}
 				int num;
-				if (<PrivateImplementationDetails>{D35AF46A-1892-4F52-B201-E664C9200079}.$$method0x600006e-1.TryGetValue(twoLetterISOLanguageName, ref num))
+				if (languageCodeToId.TryGetValue(twoLetterISOLanguageName, out num))
 				{
 					switch (num)
 					{
@@ -613,6 +618,32 @@ namespace Sonic_CD
 			Error,
 			// Token: 0x0400010B RID: 267
 			UpdateNeeded
+		}
+	}
+
+	public class ContentManagerPatch : Microsoft.Xna.Framework.Content.ContentManager
+	{
+		public ContentManagerPatch( IServiceProvider serviceProvider ) : base( serviceProvider )
+		{
+		}
+
+		protected override Stream OpenStream( string assetName )
+		{
+			var path = Path.Combine(RootDirectory, assetName);
+			var xnbPath = path + ".xnb";
+			if ( File.Exists( xnbPath ) )
+			{
+				// Patch platform code
+				var stream = new FileStream( xnbPath, FileMode.Open, FileAccess.ReadWrite );
+				stream.Seek( 0x3, SeekOrigin.Current );
+				stream.WriteByte( ( byte )'w' );
+				stream.Seek( 0, SeekOrigin.Begin );
+				return stream;
+			}
+			else
+			{
+				return File.OpenRead( path );
+			}
 		}
 	}
 }

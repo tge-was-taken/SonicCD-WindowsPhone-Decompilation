@@ -116,11 +116,11 @@ namespace Retro_Engine
 			}
 			else if (y > 0)
 			{
-				result = 128 - GlobalAppDefinitions.ATanValue256[i, j];
+				result = (byte)(128 - GlobalAppDefinitions.ATanValue256[i, j]);
 			}
 			else
 			{
-				result = 128 + GlobalAppDefinitions.ATanValue256[i, j];
+				result = (byte)(128 + GlobalAppDefinitions.ATanValue256[i, j]);
 			}
 			return result;
 		}

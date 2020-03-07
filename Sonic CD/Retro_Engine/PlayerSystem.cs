@@ -893,8 +893,8 @@ namespace Retro_Engine
 					playerO.left = StageSystem.gKeyDown.left;
 					playerO.right = StageSystem.gKeyDown.right;
 				}
-				playerO.jumpHold = (StageSystem.gKeyDown.buttonA | StageSystem.gKeyDown.buttonB | StageSystem.gKeyDown.buttonC);
-				playerO.jumpPress = (StageSystem.gKeyPress.buttonA | StageSystem.gKeyPress.buttonB | StageSystem.gKeyPress.buttonC);
+				playerO.jumpHold = (byte)(StageSystem.gKeyDown.buttonA | StageSystem.gKeyDown.buttonB | StageSystem.gKeyDown.buttonC);
+				playerO.jumpPress = (byte)(StageSystem.gKeyPress.buttonA | StageSystem.gKeyPress.buttonB | StageSystem.gKeyPress.buttonC);
 				PlayerSystem.delayUp = (ushort)(PlayerSystem.delayUp << 1);
 				PlayerSystem.delayUp |= (ushort)playerO.up;
 				PlayerSystem.delayDown = (ushort)(PlayerSystem.delayDown << 1);

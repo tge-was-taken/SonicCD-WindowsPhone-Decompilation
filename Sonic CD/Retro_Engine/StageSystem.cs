@@ -165,7 +165,7 @@ namespace Retro_Engine
 							}
 						}
 					}
-					StageSystem.milliSeconds = GlobalAppDefinitions.frameCounter * 100 / 60;
+					StageSystem.milliSeconds = (byte)(GlobalAppDefinitions.frameCounter * 100 / 60);
 				}
 				ObjectSystem.ProcessObjects();
 				if (StageSystem.cameraTarget > -1)
@@ -429,7 +429,7 @@ namespace Retro_Engine
 					{
 						byte b = FileIO.ReadByte();
 						int num2 = b >> 4;
-						StageSystem.tileCollisions[j].flags[i] = (b & 15);
+						StageSystem.tileCollisions[j].flags[i] = (byte)(b & 15);
 						b = FileIO.ReadByte();
 						StageSystem.tileCollisions[j].angle[i] = (uint)b;
 						b = FileIO.ReadByte();
@@ -791,7 +791,7 @@ namespace Retro_Engine
 							{
 								array[2] = FileIO.ReadByte();
 								array2[0] = array[1];
-								array2[1] = array[2] - 1;
+								array2[1] = (byte)(array[2] - 1);
 								for (int k = 0; k < (int)array2[1]; k++)
 								{
 									StageSystem.stageLayouts[i].lineScrollRef[num] = array2[0];
@@ -2787,7 +2787,7 @@ namespace Retro_Engine
 				if (StageSystem.gameMenu[1].selection1 < 0)
 				{
 					StageSystem.gameMenu[1].selection1 = (int)(StageSystem.gameMenu[1].numRows - 1);
-					StageSystem.gameMenu[1].visibleRowOffset = StageSystem.gameMenu[1].numRows - StageSystem.gameMenu[1].numVisibleRows;
+					StageSystem.gameMenu[1].visibleRowOffset = (ushort)(StageSystem.gameMenu[1].numRows - StageSystem.gameMenu[1].numVisibleRows);
 				}
 				TextSystem.DrawTextMenu(StageSystem.gameMenu[0], GlobalAppDefinitions.SCREEN_CENTER - 4, 40);
 				TextSystem.DrawTextMenu(StageSystem.gameMenu[1], GlobalAppDefinitions.SCREEN_CENTER + 100, 64);

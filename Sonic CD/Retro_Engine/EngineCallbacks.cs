@@ -28,7 +28,7 @@ namespace Retro_Engine
 			Thread.Sleep(1000);
 			new MediaPlayerLauncher
 			{
-				Media = new Uri(text2, 2),
+				Media = new Uri(text2, UriKind.Relative),
 				Location = 1,
 				Controls = 2
 			}.Show();
@@ -251,13 +251,13 @@ namespace Retro_Engine
 			case 9:
 				new WebBrowserTask
 				{
-					Uri = new Uri("http://www.sega.com/legal/terms_mobile.php", 1)
+					Uri = new Uri("http://www.sega.com/legal/terms_mobile.php", UriKind.Absolute)
 				}.Show();
 				return;
 			case 10:
 				new WebBrowserTask
 				{
-					Uri = new Uri("http://www.sega.com/legal/privacy_mobile.php", 1)
+					Uri = new Uri("http://www.sega.com/legal/privacy_mobile.php", UriKind.Absolute)
 				}.Show();
 				return;
 			case 14:
@@ -279,7 +279,7 @@ namespace Retro_Engine
 		public static void UpsellScreen(IAsyncResult ar)
 		{
 			int valueOrDefault = Guide.EndShowMessageBox(ar).GetValueOrDefault();
-			int? num;
+			int? num = 0;
 			if (num != null)
 			{
 				switch (valueOrDefault)
@@ -315,7 +315,7 @@ namespace Retro_Engine
 		public static void ConfirmationScreen(IAsyncResult ar)
 		{
 			int valueOrDefault = Guide.EndShowMessageBox(ar).GetValueOrDefault();
-			int? num;
+			int? num = 0;
 			if (num != null)
 			{
 				switch (valueOrDefault)
@@ -338,7 +338,7 @@ namespace Retro_Engine
 		public static void ExitConfirmation(IAsyncResult ar)
 		{
 			int valueOrDefault = Guide.EndShowMessageBox(ar).GetValueOrDefault();
-			int? num;
+			int? num = 0;
 			if (num != null)
 			{
 				switch (valueOrDefault)
@@ -379,7 +379,7 @@ namespace Retro_Engine
 		public static void UpdateMessage(IAsyncResult ar)
 		{
 			int valueOrDefault = Guide.EndShowMessageBox(ar).GetValueOrDefault();
-			int? num;
+			int? num = 0;
 			if (num != null)
 			{
 				switch (valueOrDefault)
@@ -393,7 +393,7 @@ namespace Retro_Engine
 					{
 						new MarketplaceDetailTask
 						{
-							ContentType = 1
+							ContentType = (MarketplaceContentType)1
 						}.Show();
 						return;
 					}
