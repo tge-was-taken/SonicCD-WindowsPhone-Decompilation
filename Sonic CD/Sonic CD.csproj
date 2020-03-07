@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{61102618-4F02-4CE8-B7C8-DCA576B93F4F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Sonic CD</RootNamespace>
+    <AssemblyName>Sonic CD</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationIcon>Sonic CD.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Phone" />
+    <Reference Include="Microsoft.Xna.Framework" />
+    <Reference Include="Microsoft.Xna.Framework.Game" />
+    <Reference Include="Microsoft.Xna.Framework.GamerServices" />
+    <Reference Include="Microsoft.Xna.Framework.Graphics" />
+    <Reference Include="Microsoft.Xna.Framework.Input.Touch" />
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Retro_Engine\AnimationFileList.cs" />
+    <Compile Include="Retro_Engine\AnimationSystem.cs" />
+    <Compile Include="Retro_Engine\AudioPlayback.cs" />
+    <Compile Include="Retro_Engine\CollisionBox.cs" />
+    <Compile Include="Retro_Engine\CollisionMask16x16.cs" />
+    <Compile Include="Retro_Engine\CollisionSensor.cs" />
+    <Compile Include="Retro_Engine\DrawVertex.cs" />
+    <Compile Include="Retro_Engine\DrawVertex3D.cs" />
+    <Compile Include="Retro_Engine\EngineCallbacks.cs" />
+    <Compile Include="Retro_Engine\Face3D.cs" />
+    <Compile Include="Retro_Engine\FileData.cs" />
+    <Compile Include="Retro_Engine\FileIO.cs" />
+    <Compile Include="Retro_Engine\FontCharacter.cs" />
+    <Compile Include="Retro_Engine\FunctionScript.cs" />
+    <Compile Include="Retro_Engine\GfxSurfaceDesc.cs" />
+    <Compile Include="Retro_Engine\GifDecoder.cs" />
+    <Compile Include="Retro_Engine\GifLoader.cs" />
+    <Compile Include="Retro_Engine\GlobalAppDefinitions.cs" />
+    <Compile Include="Retro_Engine\GraphicsSystem.cs" />
+    <Compile Include="Retro_Engine\InputResult.cs" />
+    <Compile Include="Retro_Engine\InputSystem.cs" />
+    <Compile Include="Retro_Engine\LayoutMap.cs" />
+    <Compile Include="Retro_Engine\LineScrollParallax.cs" />
+    <Compile Include="Retro_Engine\Mappings128x128.cs" />
+    <Compile Include="Retro_Engine\MusicTrackInfo.cs" />
+    <Compile Include="Retro_Engine\ObjectDrawList.cs" />
+    <Compile Include="Retro_Engine\ObjectEntity.cs" />
+    <Compile Include="Retro_Engine\ObjectScript.cs" />
+    <Compile Include="Retro_Engine\ObjectSystem.cs" />
+    <Compile Include="Retro_Engine\PaletteEntry.cs" />
+    <Compile Include="Retro_Engine\PlayerObject.cs" />
+    <Compile Include="Retro_Engine\PlayerStatistics.cs" />
+    <Compile Include="Retro_Engine\PlayerSystem.cs" />
+    <Compile Include="Retro_Engine\Quad2D.cs" />
+    <Compile Include="Retro_Engine\RenderDevice.cs" />
+    <Compile Include="Retro_Engine\Scene3D.cs" />
+    <Compile Include="Retro_Engine\ScriptEngine.cs" />
+    <Compile Include="Retro_Engine\SortList.cs" />
+    <Compile Include="Retro_Engine\SpriteAnimation.cs" />
+    <Compile Include="Retro_Engine\SpriteFrame.cs" />
+    <Compile Include="Retro_Engine\StageList.cs" />
+    <Compile Include="Retro_Engine\StageSystem.cs" />
+    <Compile Include="Retro_Engine\TextMenu.cs" />
+    <Compile Include="Retro_Engine\TextSystem.cs" />
+    <Compile Include="Retro_Engine\Vertex2D.cs" />
+    <Compile Include="Retro_Engine\Vertex3D.cs" />
+    <Compile Include="Sonic_CD\Game.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Microsoft.Xna.Framework.RuntimeProfile" />
+    <EmbeddedResource Include="Microsoft.Xna.Framework.XlastConfiguration" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
